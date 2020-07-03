@@ -1,26 +1,53 @@
-let createCardButton = document.getElementById("createScrap");
-let titleInput = document.getElementById("titleInput");
-let messageInput = document.getElementById("messageField");
-let cardField = document.getElementById("scrapsField");
+let titleInput = document.getElementById("messageTitle");
+let messageInput = document.getElementById("messageBody");
+let addScrapBtn = document.getElementById("addButton");
+let scrapsField = document.getElementById("scrapsField");
 
-function createCard() {
-  let scrapTitle = document.createTextNode(titleInput.value);
-  let scrapText = document.createTextNode(messageInput.value);
-  let card = document.createElement("div");
-  let cardTitle = document.createElement("div");
-  let cardMessage = document.createElement("div");
-  let messageTextField = document.createElement("p");
+let scraps = [];
 
-  card.setAttribute("class", "message-cards card text-white bg-dark m-2 col-3");
-  cardTitle.setAttribute("class", "card-header font-weight-bold");
-  cardMessage.setAttribute("class", "card-body");
+function renderScraps() {
+  scrapsField.innerHTML = "";
 
-  card.appendChild(cardTitle);
-  card.appendChild(cardMessage);
-  cardTitle.appendChild(scrapTitle);
-  cardMessage.appendChild(messageTextField);
-  messageTextField.appendChild(scrapText);
-  cardField.appendChild(card);
+  for (const scrap of scraps) {
+    let position = scraps.indexOf(scrap);
+    scrapsField.innerHTML += createScrapCard(
+      scrap.title,
+      scrap.message,
+      position
+    );
+  }
 }
 
-createCardButton.onclick = createCard;
+function addNewScrap() {
+  let title = titleInput.value;
+  let message = messageInput.value;
+
+  titleInput.value = "";
+  messageInput.value = "";
+
+  scraps.push({ title, message });
+
+  renderScraps();
+}
+
+function deleteScrap(position) {
+  scraps.splice(position, 1);
+  renderScraps();
+}
+
+function createScrapCard(title, message, position) {
+  return `
+  <div class="message-cards card text-white bg-dark m-2 col-3">
+    <div class="card-header font-weight-bold">${title}</div>
+    <div class="card-body">
+      <p class="card-text">
+        ${message}
+      </p>
+      <button type="button" class="btn btn-light mt-2 w-100 mt-3 font-weight-bold" onclick="deleteScrap(${position})">Excluir</button>
+    </div>
+  </div>
+  `;
+}
+
+renderScraps();
+addScrapBtn.onclick = addNewScrap;

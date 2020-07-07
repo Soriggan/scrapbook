@@ -43,10 +43,19 @@ function createScrapCard(title, message, position) {
       <p class="card-text">
         ${message}
       </p>
-      <button type="button" class="btn btn-light mt-2 w-100 mt-3 font-weight-bold" onclick="deleteScrap(${position})">Excluir</button>
+      <div class="w-100 d-flex justify-content-end pr-2 pb-2">
+      <button type="button" class="btn btn-danger mr-1" onclick="deleteScrap(${position})">Excluir</button>
+      <button type="button" class="btn btn btn-primary" onclick="openEditModal">Editar</button>
+      </div>
+      
+      
     </div>
   </div>
   `;
+}
+
+function openEditModal() {
+  $("#editModal").modal("toggle");
 }
 
 renderScraps();

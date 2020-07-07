@@ -1,5 +1,7 @@
 let titleInput = document.getElementById("messageTitle");
+let editTitleInput = document.getElementById("editMessageTitle");
 let messageInput = document.getElementById("messageBody");
+let editMesssageInput = document.getElementById("editMessageBody");
 let addScrapBtn = document.getElementById("addButton");
 let scrapsField = document.getElementById("scrapsField");
 
@@ -45,7 +47,7 @@ function createScrapCard(title, message, position) {
       </p>
       <div class="w-100 d-flex justify-content-end pr-2 pb-2">
       <button type="button" class="btn btn-danger mr-1" onclick="deleteScrap(${position})">Excluir</button>
-      <button type="button" class="btn btn btn-primary" onclick="openEditModal">Editar</button>
+      <button type="button" class="btn btn btn-primary" onclick="openEditModal(${position})">Editar</button>
       </div>
       
       
@@ -54,7 +56,7 @@ function createScrapCard(title, message, position) {
   `;
 }
 
-function openEditModal() {
+function openEditModal(position) {
   $("#editModal").modal("toggle");
 }
 

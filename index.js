@@ -58,6 +58,9 @@ function createScrapCard(title, message, position) {
 
 function openEditModal(position) {
   $("#editModal").modal("toggle");
+
+  editTitleInput.value = scraps[position].title;
+  editMesssageInput.value = scraps[position].message;
 }
 
 renderScraps();

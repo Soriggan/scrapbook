@@ -4,6 +4,7 @@ let messageInput = document.getElementById("messageBody");
 let editMesssageInput = document.getElementById("editMessageBody");
 let addScrapBtn = document.getElementById("addButton");
 let scrapsField = document.getElementById("scrapsField");
+let btnSaveEdit = document.getElementById("saveEdit");
 
 let scraps = [];
 
@@ -61,6 +62,19 @@ function openEditModal(position) {
 
   editTitleInput.value = scraps[position].title;
   editMesssageInput.value = scraps[position].message;
+
+  btnSaveEdit.setAttribute("onclick", `saveChanges(${position})`);
+}
+
+function saveChanges(position) {
+  let title = editTitleInput.value;
+  let message = editMesssageInput.value;
+
+  scraps[position].title = title;
+  scraps[position].message = message;
+
+  renderScraps();
+  $("#editModal").modal("hide");
 }
 
 renderScraps();
